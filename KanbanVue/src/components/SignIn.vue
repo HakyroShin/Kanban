@@ -8,9 +8,11 @@
         <div>
             <router-link to="/Issue">Add Issue</router-link>
             <router-link to="/SignUp">SignUp</router-link>
+            <router-link to="/ListIssue">Table Issue</router-link>
             <input type="button" value="Sign in" v-on:click="onSignInClick"/>
         </div>
     </div>
+    
 </template>
 
 <script lang="js">
@@ -23,10 +25,11 @@
             return {
                 loading: false,
                 post: null,
+                issueList: null,
                 signInRequest: {
                     userName: '',
                     password: ''
-                }
+                },
             };
         },
         created() {
@@ -42,7 +45,7 @@
             onSignInClick() {
                 let vm = this;
                 store.signIn(vm.signInRequest);
-            }
+            },
         },
     });
 </script>

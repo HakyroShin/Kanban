@@ -54,6 +54,7 @@ export const store = reactive({
     events: [],
     selectedEvent: null,
     showPanel: false,
+    issue: null,
     isAuthenticated() {
         let a = fromLocalStorage();
         if (a)
@@ -156,17 +157,36 @@ export const store = reactive({
             postRevokeAction();
     },
     addIssue(data){
+        this.issue = null;
         return fetch('issue/create',{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             },
             body: JSON.stringify(data)
+            
         })
-        .then(function (response) {
-            console.log(response);
-            console.log(new Date());
-        });
 
+    },
+    editIssue(data){
+        this.issue = data;
+    },
+    getListIssue(data){
+        return fetch('list',{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        })
+    },
+    deleteIssue(data){
+        return fetch('issue/delete',{
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        })
     }
 })
